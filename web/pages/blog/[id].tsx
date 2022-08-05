@@ -1,10 +1,25 @@
 // pages/blog/[id].js
+import { useContext } from "react";
 import { client } from "libs/microcms/client";
+import { AppContext } from "pages/_app";
+import Link from "next/link";
 
 export default function BlogId({ blog }: any) {
+  const { count, setCount } = useContext(AppContext);
+
   return (
     <main>
       <h1>{blog.title}</h1>
+      <p>Context Count:{count}</p>
+      <button
+        className="bg-slate-500 px-3"
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        test
+      </button>
+      <Link href="/">to Index</Link>
       <p>{blog.publishedAt}</p>
       <div
         dangerouslySetInnerHTML={{

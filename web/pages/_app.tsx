@@ -1,8 +1,22 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "styles/globals.css";
+import { createContext, Dispatch, useState } from "react";
+import type { AppProps } from "next/app";
+
+export const AppContext = createContext(
+  {} as {
+    count: number;
+    setCount: Dispatch<React.SetStateAction<number>>;
+  }
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const [count, setCount] = useState(0);
+
+  return (
+    <AppContext.Provider value={{ count, setCount }}>
+      <Component {...pageProps} />
+    </AppContext.Provider>
+  );
 }
 
-export default MyApp
+export default MyApp;
